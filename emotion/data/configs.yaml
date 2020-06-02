@@ -1,0 +1,11 @@
+path:
+  home: D:/PythonWorkspace/GitWorkspace/classification_zn
+  corpus_name: corpus.json
+  vocab_path: vocabs.txt
+  emb_name: emb.txt
+model:
+  model_home: D:/PythonWorkspace/GitWorkspace/classification_zn/model_save/
+  model_name: cnn_emotion_predicate
+hyperparameters:
+  max_sequence_length: 100
+  emb_size: 200

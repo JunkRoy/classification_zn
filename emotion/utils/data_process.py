@@ -3,8 +3,9 @@ import pandas as pd
 import jieba
 from collections import Counter
 
+
 def preprocess():
-    home = 'H:\\Python_Workspace\\classification_zn\\emotion\data'
+    home = 'H:/Python_Workspace/classification_zn/emotion/data'
     file_name = 'waimai_10k.csv'
 
     datas = pd.read_csv(os.path.join(home, file_name), encoding='utf-8')
@@ -49,4 +50,3 @@ def statistic(home=None):
 
 if __name__ == '__main__':
     statistic()
-
