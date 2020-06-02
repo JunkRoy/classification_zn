@@ -5,7 +5,7 @@ from collections import Counter
 
 
 def preprocess():
-    home = 'H:/Python_Workspace/classification_zn/emotion/data'
+    home = '../emotion/data'
     file_name = 'waimai_10k.csv'
 
     datas = pd.read_csv(os.path.join(home, file_name), encoding='utf-8')
@@ -32,7 +32,7 @@ def preprocess():
 
 
 def statistic(home=None):
-    home = 'H:\\Python_Workspace\\classification_zn\\emotion\data'
+    home = '../emotion/data'
     file_path = 'corpus.json'
 
     with open(os.path.join(home, file_path), 'r', encoding='utf-8') as f:
@@ -47,6 +47,19 @@ def statistic(home=None):
         print(Counter(length))
         print(Counter(types))
 
+def split_data():
+    home= '../data/'
+    corpus_name = 'corpus.json'
+    corpus = []
+    with open(os.path.join(home, corpus_name), 'r', encoding='utf-8') as f:
+        for line in f:
+            corpus.append(line)
+    train_size = int(len(corpus)*0.9)
+    with open(os.path.join(home, 'train.json'), 'w', encoding='utf-8') as f:
+        f.writelines(corpus[:train_size])
+    with open(os.path.join(home, 'dev.json'), 'w', encoding='utf-8') as f:
+        f.writelines(corpus[train_size:])
 
 if __name__ == '__main__':
-    statistic()
+    # statistic()
+    split_data()
