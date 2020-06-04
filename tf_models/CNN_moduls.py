@@ -12,7 +12,7 @@ class TextCNN(object):
     """
 
     def __init__(
-            self, w2v_model, sequence_length, num_classes, vocab_size,
+            self, vocab, sequence_length, num_classes, vocab_size,
             embedding_size, filter_sizes, num_filters, l2_reg_lambda=0.0):
 
         # Placeholders for input, output and dropout

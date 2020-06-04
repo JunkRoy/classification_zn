@@ -20,7 +20,7 @@ def config_init(flags, config_path):
         flags.DEFINE_integer("emb_size", cfg['hyperparameters']['emb_size'])
 
 
-def word2vec(config, word2vec_path=None, corpus_path=None):
+def get_vocab(config=None, word2vec_path=None, corpus_path=None):
     emb_path = '../model/vocab/vocab.txt'
     vocab = {}
     if os.path.exists(emb_path):
@@ -59,6 +59,7 @@ def get_inputs(sample, vocab_dict, config=None):
 
 
 def creat_bunch(path, vocab_dict):
+
     bunch = Bunch(ids=[], input_x=[], input_y=[])
 
     with open(path, 'r', encoding='utf-8') as f:
@@ -71,19 +72,19 @@ def creat_bunch(path, vocab_dict):
     return bunch
 
 
-def preprocess(config):
+def preprocess(config=None):
     # corpus_path = '../data/corpus.json'
     train_path = '../data/train.json'
     dev_path = '../data/dev.json'
-    vocab_dict = word2vec(None)
+    vocab_dict = get_vocab(config=None)
     train_bunch = creat_bunch(train_path, vocab_dict)
     dev_bunch = creat_bunch(dev_path, vocab_dict)
 
-    return train_bunch, dev_bunch
+    return train_bunch, dev_bunch, vocab_dict
 
 
 if __name__ == '__main__':
     corpus_path = 'D:\\PythonWorkspace\\GitWorkspace\\classification_zn\\' \
                   'emotion\\data\\corpus.json'
 
-    word2vec(None, corpus_path=corpus_path)
+    get_vocab(config=None, corpus_path=corpus_path)
