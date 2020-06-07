@@ -59,7 +59,6 @@ def get_inputs(sample, vocab_dict, config=None):
 
 
 def creat_bunch(path, vocab_dict):
-
     bunch = Bunch(ids=[], input_x=[], input_y=[])
 
     with open(path, 'r', encoding='utf-8') as f:
@@ -74,13 +73,18 @@ def creat_bunch(path, vocab_dict):
 
 def preprocess(config=None):
     # corpus_path = '../data/corpus.json'
+    word2vec = {}
     train_path = '../data/train.json'
     dev_path = '../data/dev.json'
     vocab_dict = get_vocab(config=None)
+    emb_size = 200
+    for key, value in vocab_dict.items():
+        word2vec[value] = np.zeros(emb_size)
+
     train_bunch = creat_bunch(train_path, vocab_dict)
     dev_bunch = creat_bunch(dev_path, vocab_dict)
 
-    return train_bunch, dev_bunch, vocab_dict
+    return train_bunch, dev_bunch, vocab_dict, word2vec
 
 
 if __name__ == '__main__':

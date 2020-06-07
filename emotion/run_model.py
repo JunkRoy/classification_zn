@@ -14,10 +14,8 @@ def train():
     # vocab_dict = get_vocab()
     # train_bunch = creat_bunch(os.path.join(home, train_file), )
 
-    def feed_data(batch):
-        pass
 
-    train_bunch, def_bunch, vocab_dict = preprocess()
+    train_bunch, def_bunch, vocab_dict, word2vec = preprocess()
 
 
 
@@ -26,5 +24,20 @@ def train():
         model = TextCNN(vocab_dict, sequence_length=100, num_classes=2, vocab_size=len(vocab_dict),
                         embedding_size=100, filter_sizes=[1, 2, 3, 4, 5], num_filters=128)
 
+        def feed_data(batch):
+            feed_dict = {
+                model.input_x:batch.input_x,
+                model.input_y: batch.input_y,
+                model.dropout_keep_prob:0.5
+            }
+            return feed_dict
+
         for i, batch in enumerate(batch_train):
-            pass
+            feed_dict = feed_data(batch)
+            acc, loss = sess.run([model.accuracy, model.loss], feed_dict=feed_dict)
+
+            print(loss, acc)
+
+
+if __name__ == '__main__':
+    train()
